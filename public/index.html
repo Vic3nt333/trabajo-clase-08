@@ -3,31 +3,149 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi Aplicación Express</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 800px;
-      margin: 50px auto;
-      padding: 20px;
-      background-color: #f5f5f5;
-    }
-    h1 {
-      color: #333;
-    }
-    .info {
-      background-color: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-  </style>
+  <title>Gestor de Tareas - Express</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="info">
-    <h1>¡Bienvenido a tu Servidor Express!</h1>
-    <p>El servidor está funcionando correctamente y sirviendo archivos estáticos desde la carpeta public.</p>
-    <p>Reemplaza este archivo con tu sitio estático de la Actividad 1.2</p>
+  <div class="container">
+    <header>
+      <h1>📋 Gestor de Tareas</h1>
+      <p>Aplicación de tareas pendientes - Trabajo Clase 08</p>
+    </header>
+
+    <main>
+      <section class="agregar-tarea">
+        <h2>Agregar Nueva Tarea</h2>
+        <div class="formulario">
+          <input type="text" id="inputTarea" placeholder="Escribe la descripción de tu tarea..." />
+          <button id="btnAgregar">Agregar</button>
+        </div>
+        <div id="mensaje"></div>
+      </section>
+
+      <section class="lista-tareas">
+        <h2>Tus Tareas</h2>
+        <ul id="tareasList" class="tareas-container">
+          <li class="cargando">Cargando tareas...</li>
+        </ul>
+      </section>
+
+      <section class="informacion">
+        <h2>ℹ️ Información de la API</h2>
+        <div class="api-info">
+          <h3>Endpoints disponibles:</h3>
+          <ul>
+            <li><code>GET /api/tareas</code> - Obtener todas las tareas</li>
+            <li><code>POST /api/tareas</code> - Crear nueva tarea</li>
+            <li><code>PUT /api/tareas/:id/completar</code> - Marcar como completada</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Servidor Express corriendo en http://localhost:3000</p>
+    </footer>
   </div>
+
+  <script>
+    const API_URL = 'http://localhost:3000/api';
+
+    // Cargar tareas al abrir la página
+    document.addEventListener('DOMContentLoaded', cargarTareas);
+
+    // Evento del botón agregar
+    document.getElementById('btnAgregar').addEventListener('click', agregarTarea);
+
+    // Permitir agregar con Enter
+    document.getElementById('inputTarea').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') agregarTarea();
+    });
+
+    async function cargarTareas() {
+      try {
+        const response = await fetch(`${API_URL}/tareas`);
+        const tareas = await response.json();
+        mostrarTareas(tareas);
+      } catch (error) {
+        console.error('Error al cargar tareas:', error);
+        document.getElementById('tareasList').innerHTML = '<li class="error">Error al cargar tareas</li>';
+      }
+    }
+
+    function mostrarTareas(tareas) {
+      const lista = document.getElementById('tareasList');
+      
+      if (tareas.length === 0) {
+        lista.innerHTML = '<li class="vacia">No hay tareas. ¡Crea una!</li>';
+        return;
+      }
+
+      lista.innerHTML = tareas.map(tarea => `
+        <li class="tarea ${tarea.completada ? 'completada' : ''}">
+          <span class="texto">${tarea.texto}</span>
+          <div class="acciones">
+            ${!tarea.completada ? `<button class="btn-completar" onclick="completarTarea(${tarea.id})">✓ Completar</button>` : '<span class="completada-badge">✓ Completada</span>'}
+          </div>
+        </li>
+      `).join('');
+    }
+
+    async function agregarTarea() {
+      const input = document.getElementById('inputTarea');
+      const texto = input.value.trim();
+      const mensaje = document.getElementById('mensaje');
+
+      if (!texto) {
+        mensaje.textContent = '⚠️ Por favor ingresa una descripción';
+        mensaje.style.color = '#d9534f';
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_URL}/tareas`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ texto })
+        });
+
+        if (response.ok) {
+          mensaje.textContent = '✓ Tarea agregada exitosamente';
+          mensaje.style.color = '#5cb85c';
+          input.value = '';
+          setTimeout(() => {
+            mensaje.textContent = '';
+            cargarTareas();
+          }, 1000);
+        } else {
+          const error = await response.json();
+          mensaje.textContent = `❌ ${error.error}`;
+          mensaje.style.color = '#d9534f';
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        mensaje.textContent = '❌ Error al agregar tarea';
+        mensaje.style.color = '#d9534f';
+      }
+    }
+
+    async function completarTarea(id) {
+      try {
+        const response = await fetch(`${API_URL}/tareas/${id}/completar`, {
+          method: 'PUT'
+        });
+
+        if (response.ok) {
+          cargarTareas();
+        } else {
+          const error = await response.json();
+          alert(`Error: ${error.error}`);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Error al completar tarea');
+      }
+    }
+  </script>
 </body>
 </html>

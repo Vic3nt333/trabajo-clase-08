@@ -1,0 +1,258 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding: 20px;
+  color: #333;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+header {
+  text-align: center;
+  color: white;
+  margin-bottom: 40px;
+  padding: 20px;
+}
+
+header h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+header p {
+  font-size: 1.1em;
+  opacity: 0.9;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+section {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+  color: #667eea;
+  margin-bottom: 20px;
+  font-size: 1.5em;
+}
+
+/* Formulario */
+.formulario {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+#inputTarea {
+  flex: 1;
+  padding: 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 5px;
+  font-size: 1em;
+  transition: border-color 0.3s;
+}
+
+#inputTarea:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+#btnAgregar {
+  padding: 12px 25px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1em;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#btnAgregar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+#btnAgregar:active {
+  transform: translateY(0);
+}
+
+/* Mensajes */
+#mensaje {
+  min-height: 20px;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Lista de tareas */
+.tareas-container {
+  list-style: none;
+}
+
+.tarea {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  margin-bottom: 10px;
+  background: #f8f9fa;
+  border-left: 4px solid #667eea;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+
+.tarea:hover {
+  background: #f0f1f9;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+}
+
+.tarea.completada {
+  background: #e8f5e9;
+  border-left-color: #5cb85c;
+  opacity: 0.7;
+}
+
+.tarea.completada .texto {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.texto {
+  flex: 1;
+  font-size: 1em;
+  color: #333;
+}
+
+.acciones {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-completar {
+  padding: 8px 15px;
+  background: #5cb85c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background 0.3s;
+}
+
+.btn-completar:hover {
+  background: #4cae4c;
+}
+
+.completada-badge {
+  padding: 8px 15px;
+  background: #e8f5e9;
+  color: #5cb85c;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.cargando,
+.vacia {
+  text-align: center;
+  padding: 20px;
+  color: #999;
+  font-style: italic;
+}
+
+.error {
+  text-align: center;
+  padding: 20px;
+  color: #d9534f;
+  background: #fadbd8;
+  border-radius: 5px;
+}
+
+/* Información API */
+.api-info {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.api-info h3 {
+  color: #667eea;
+  margin-bottom: 10px;
+  font-size: 1.1em;
+}
+
+.api-info ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.api-info li {
+  padding: 8px 0;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 0.95em;
+}
+
+.api-info li:last-child {
+  border-bottom: none;
+}
+
+code {
+  background: #e0e0e0;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: 'Courier New', monospace;
+  color: #d9534f;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  color: white;
+  margin-top: 40px;
+  padding: 20px;
+  font-size: 0.9em;
+}
+
+footer p {
+  opacity: 0.8;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  header h1 {
+    font-size: 2em;
+  }
+
+  .formulario {
+    flex-direction: column;
+  }
+
+  #btnAgregar {
+    width: 100%;
+  }
+
+  section {
+    padding: 15px;
+  }
+}
