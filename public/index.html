@@ -38,6 +38,7 @@
             <li><code>GET /api/tareas</code> - Obtener todas las tareas</li>
             <li><code>POST /api/tareas</code> - Crear nueva tarea</li>
             <li><code>PUT /api/tareas/:id/completar</code> - Marcar como completada</li>
+            <li><code>DELETE /api/tareas/:id</code> - Borrar una tarea</li>
           </ul>
         </div>
       </section>
@@ -85,7 +86,8 @@
         <li class="tarea ${tarea.completada ? 'completada' : ''}">
           <span class="texto">${tarea.texto}</span>
           <div class="acciones">
-            ${!tarea.completada ? `<button class="btn-completar" onclick="completarTarea(${tarea.id})">✓ Completar</button>` : '<span class="completada-badge">✓ Completada</span>'}
+            ${!tarea.completada ? `<button class="btn-completar" onclick="completarTarea(${tarea.id})">✓ Completar</button>` : ''}
+            <button class="btn-borrar" onclick="borrarTarea(${tarea.id})">✕ Borrar</button>
           </div>
         </li>
       `).join('');
@@ -98,7 +100,7 @@
 
       if (!texto) {
         mensaje.textContent = '⚠️ Por favor ingresa una descripción';
-        mensaje.style.color = '#d9534f';
+        mensaje.style.color = '#ff6b6b';
         return;
       }
 
@@ -111,7 +113,7 @@
 
         if (response.ok) {
           mensaje.textContent = '✓ Tarea agregada exitosamente';
-          mensaje.style.color = '#5cb85c';
+          mensaje.style.color = '#64ff64';
           input.value = '';
           setTimeout(() => {
             mensaje.textContent = '';
@@ -120,12 +122,12 @@
         } else {
           const error = await response.json();
           mensaje.textContent = `❌ ${error.error}`;
-          mensaje.style.color = '#d9534f';
+          mensaje.style.color = '#ff6b6b';
         }
       } catch (error) {
         console.error('Error:', error);
         mensaje.textContent = '❌ Error al agregar tarea';
-        mensaje.style.color = '#d9534f';
+        mensaje.style.color = '#ff6b6b';
       }
     }
 
@@ -144,6 +146,24 @@
       } catch (error) {
         console.error('Error:', error);
         alert('Error al completar tarea');
+      }
+    }
+
+    async function borrarTarea(id) {
+      try {
+        const response = await fetch(`${API_URL}/tareas/${id}`, {
+          method: 'DELETE'
+        });
+
+        if (response.ok) {
+          cargarTareas();
+        } else {
+          const error = await response.json();
+          alert(`Error: ${error.error}`);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Error al borrar tarea');
       }
     }
   </script>

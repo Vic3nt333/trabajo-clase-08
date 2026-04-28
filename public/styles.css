@@ -184,6 +184,24 @@ h2 {
   color: #0a0a0a;
 }
 
+.btn-borrar {
+  padding: 8px 12px;
+  background: transparent;
+  color: #ff6b6b;
+  border: 2px solid #ff6b6b;
+  border-radius: 0;
+  cursor: pointer;
+  font-size: 0.85em;
+  font-weight: 500;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.btn-borrar:hover {
+  background: #ff6b6b;
+  color: #0a0a0a;
+}
+
 .completada-badge {
   padding: 8px 12px;
   background: transparent;
