@@ -5,104 +5,120 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  background: #0a0a0a;
   min-height: 100vh;
   padding: 20px;
-  color: #333;
+  color: #e0e0e0;
 }
 
 .container {
-  max-width: 600px;
+  max-width: 700px;
   margin: 0 auto;
 }
 
 header {
   text-align: center;
-  color: white;
   margin-bottom: 40px;
-  padding: 20px;
+  padding: 30px 0;
+  border-bottom: 2px solid #ffffff;
 }
 
 header h1 {
-  font-size: 2.5em;
-  margin-bottom: 10px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  font-size: 2.2em;
+  color: #ffffff;
+  margin-bottom: 8px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
 }
 
 header p {
-  font-size: 1.1em;
-  opacity: 0.9;
+  font-size: 0.95em;
+  color: #999;
+  font-weight: 300;
 }
 
 main {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 20px;
 }
 
 section {
-  background: white;
-  padding: 25px;
-  border-radius: 10px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  background: #1a1a1a;
+  padding: 28px;
+  border: 2px solid #ffffff;
+  border-radius: 0;
 }
 
 h2 {
-  color: #667eea;
-  margin-bottom: 20px;
-  font-size: 1.5em;
+  color: #ffffff;
+  margin-bottom: 18px;
+  font-size: 1.3em;
+  font-weight: 600;
+  letter-spacing: -0.3px;
 }
 
 /* Formulario */
 .formulario {
   display: flex;
-  gap: 10px;
-  margin-bottom: 15px;
+  gap: 8px;
+  margin-bottom: 12px;
 }
 
 #inputTarea {
   flex: 1;
-  padding: 12px;
-  border: 2px solid #e0e0e0;
-  border-radius: 5px;
-  font-size: 1em;
-  transition: border-color 0.3s;
+  padding: 12px 14px;
+  background: #0a0a0a;
+  border: 2px solid #ffffff;
+  border-radius: 0;
+  font-size: 0.95em;
+  color: #ffffff;
+  font-family: inherit;
+  transition: all 0.2s;
 }
 
 #inputTarea:focus {
   outline: none;
-  border-color: #667eea;
+  background: #0a0a0a;
+  border-color: #ffffff;
+  box-shadow: inset 0 0 0 1px #ffffff;
+}
+
+#inputTarea::placeholder {
+  color: #666;
 }
 
 #btnAgregar {
-  padding: 12px 25px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border: none;
-  border-radius: 5px;
+  padding: 12px 20px;
+  background: #ffffff;
+  color: #0a0a0a;
+  border: 2px solid #ffffff;
+  border-radius: 0;
   cursor: pointer;
-  font-weight: bold;
-  font-size: 1em;
-  transition: transform 0.2s, box-shadow 0.2s;
+  font-weight: 600;
+  font-size: 0.95em;
+  transition: all 0.2s;
+  font-family: inherit;
 }
 
 #btnAgregar:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  background: #0a0a0a;
+  color: #ffffff;
 }
 
 #btnAgregar:active {
-  transform: translateY(0);
+  opacity: 0.8;
 }
 
 /* Mensajes */
 #mensaje {
-  min-height: 20px;
-  font-weight: bold;
+  min-height: 18px;
+  font-weight: 500;
   text-align: center;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 0;
+  font-size: 0.9em;
 }
 
 /* Lista de tareas */
@@ -114,92 +130,100 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
+  padding: 16px;
   margin-bottom: 10px;
-  background: #f8f9fa;
-  border-left: 4px solid #667eea;
-  border-radius: 5px;
-  transition: all 0.3s;
+  background: #0a0a0a;
+  border: 1px solid #333;
+  border-left: 3px solid #ffffff;
+  transition: all 0.2s;
 }
 
 .tarea:hover {
-  background: #f0f1f9;
-  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+  background: #111;
+  border-left-color: #ffffff;
 }
 
 .tarea.completada {
-  background: #e8f5e9;
-  border-left-color: #5cb85c;
-  opacity: 0.7;
+  background: #0a0a0a;
+  border-left-color: #666;
+  opacity: 0.6;
 }
 
 .tarea.completada .texto {
   text-decoration: line-through;
-  color: #999;
+  color: #666;
 }
 
 .texto {
   flex: 1;
-  font-size: 1em;
-  color: #333;
+  font-size: 0.95em;
+  color: #e0e0e0;
+  font-weight: 400;
 }
 
 .acciones {
   display: flex;
-  gap: 10px;
+  gap: 8px;
 }
 
 .btn-completar {
-  padding: 8px 15px;
-  background: #5cb85c;
-  color: white;
-  border: none;
-  border-radius: 5px;
+  padding: 8px 12px;
+  background: transparent;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  border-radius: 0;
   cursor: pointer;
-  font-size: 0.9em;
-  transition: background 0.3s;
+  font-size: 0.85em;
+  font-weight: 500;
+  transition: all 0.2s;
+  font-family: inherit;
 }
 
 .btn-completar:hover {
-  background: #4cae4c;
+  background: #ffffff;
+  color: #0a0a0a;
 }
 
 .completada-badge {
-  padding: 8px 15px;
-  background: #e8f5e9;
-  color: #5cb85c;
-  border-radius: 5px;
-  font-weight: bold;
-  font-size: 0.9em;
+  padding: 8px 12px;
+  background: transparent;
+  color: #666;
+  border: 1px solid #666;
+  border-radius: 0;
+  font-weight: 500;
+  font-size: 0.85em;
 }
 
 .cargando,
 .vacia {
   text-align: center;
   padding: 20px;
-  color: #999;
+  color: #666;
   font-style: italic;
 }
 
 .error {
   text-align: center;
-  padding: 20px;
-  color: #d9534f;
-  background: #fadbd8;
-  border-radius: 5px;
+  padding: 15px;
+  color: #ff6b6b;
+  background: transparent;
+  border: 2px solid #ff6b6b;
+  border-radius: 0;
+  font-weight: 500;
 }
 
 /* Información API */
 .api-info {
-  background: #f8f9fa;
-  padding: 15px;
-  border-radius: 5px;
+  background: #0a0a0a;
+  padding: 16px;
+  border: 1px solid #333;
 }
 
 .api-info h3 {
-  color: #667eea;
-  margin-bottom: 10px;
-  font-size: 1.1em;
+  color: #ffffff;
+  margin-bottom: 12px;
+  font-size: 1.05em;
+  font-weight: 600;
 }
 
 .api-info ul {
@@ -208,9 +232,10 @@ h2 {
 }
 
 .api-info li {
-  padding: 8px 0;
-  border-bottom: 1px solid #e0e0e0;
-  font-size: 0.95em;
+  padding: 10px 0;
+  border-bottom: 1px solid #333;
+  font-size: 0.9em;
+  color: #d0d0d0;
 }
 
 .api-info li:last-child {
@@ -218,30 +243,33 @@ h2 {
 }
 
 code {
-  background: #e0e0e0;
-  padding: 2px 6px;
-  border-radius: 3px;
+  background: #0a0a0a;
+  padding: 3px 8px;
+  border-radius: 0;
   font-family: 'Courier New', monospace;
-  color: #d9534f;
+  color: #64b5f6;
+  border: 1px solid #333;
+  font-size: 0.9em;
 }
 
 /* Footer */
 footer {
   text-align: center;
-  color: white;
+  color: #666;
   margin-top: 40px;
   padding: 20px;
+  border-top: 2px solid #ffffff;
   font-size: 0.9em;
 }
 
 footer p {
-  opacity: 0.8;
+  font-weight: 300;
 }
 
 /* Responsive */
 @media (max-width: 500px) {
   header h1 {
-    font-size: 2em;
+    font-size: 1.8em;
   }
 
   .formulario {
@@ -253,6 +281,10 @@ footer p {
   }
 
   section {
-    padding: 15px;
+    padding: 20px;
+  }
+
+  .container {
+    padding: 0;
   }
 }
