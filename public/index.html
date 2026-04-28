@@ -14,6 +14,15 @@
     </header>
 
     <main>
+      <section class="saludar-section">
+        <h2>Enviar Saludo</h2>
+        <div class="formulario">
+          <input type="text" id="inputNombre" placeholder="Escribe tu nombre..." />
+          <button id="btnSaludar">Saludar</button>
+        </div>
+        <div id="mensajeSaludo"></div>
+      </section>
+
       <section class="agregar-tarea">
         <h2>Agregar Nueva Tarea</h2>
         <div class="formulario">
@@ -55,6 +64,14 @@
     // Cargar tareas al abrir la página
     document.addEventListener('DOMContentLoaded', cargarTareas);
 
+    // Evento del botón saludar
+    document.getElementById('btnSaludar').addEventListener('click', enviarSaludo);
+
+    // Permitir saludar con Enter
+    document.getElementById('inputNombre').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') enviarSaludo();
+    });
+
     // Evento del botón agregar
     document.getElementById('btnAgregar').addEventListener('click', agregarTarea);
 
@@ -62,6 +79,44 @@
     document.getElementById('inputTarea').addEventListener('keypress', (e) => {
       if (e.key === 'Enter') agregarTarea();
     });
+
+    async function enviarSaludo() {
+      const input = document.getElementById('inputNombre');
+      const nombre = input.value.trim();
+      const mensaje = document.getElementById('mensajeSaludo');
+
+      if (!nombre) {
+        mensaje.textContent = '⚠️ Por favor ingresa tu nombre';
+        mensaje.style.color = '#ff6b6b';
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_URL}/saludar`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nombre })
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          mensaje.textContent = `✓ ${data.mensaje}`;
+          mensaje.style.color = '#64ff64';
+          input.value = '';
+          setTimeout(() => {
+            mensaje.textContent = '';
+          }, 3000);
+        } else {
+          const error = await response.json();
+          mensaje.textContent = `❌ ${error.error}`;
+          mensaje.style.color = '#ff6b6b';
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        mensaje.textContent = '❌ Error al enviar saludo';
+        mensaje.style.color = '#ff6b6b';
+      }
+    }
 
     async function cargarTareas() {
       try {

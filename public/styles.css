@@ -51,6 +51,13 @@ section {
   border-radius: 0;
 }
 
+.saludar-section {
+  background: #1a1a1a;
+  padding: 28px;
+  border: 2px solid #ffffff;
+  border-radius: 0;
+}
+
 h2 {
   color: #ffffff;
   margin-bottom: 18px;
